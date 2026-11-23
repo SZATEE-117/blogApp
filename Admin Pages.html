@@ -1,0 +1,396 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Admin Pages</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- SIDEBAR (shared) -->
+<!-- ══════════════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="sidebar-brand-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+    </div>
+    <span class="sidebar-brand-name">MyApp</span>
+  </div>
+
+  <span class="nav-section-label">Menu</span>
+  <a class="nav-item" href="admin.php" id="nav-home">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/></svg>
+    Home
+  </a>
+  <button class="nav-item active" id="nav-bookings" onclick="showPage('bookings')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+    Bookings
+  </button>
+  <button class="nav-item" id="nav-cabins" onclick="showPage('cabins')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+    Cabins
+  </button>
+  <button class="nav-item" id="nav-users" onclick="showPage('users')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+    Users
+  </button>
+
+  <span class="nav-section-label">System</span>
+  <button class="nav-item" id="nav-settings" onclick="showPage('settings')">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+    Settings
+  </button>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-avatar">A</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Admin</div>
+        <div class="sidebar-user-role">Administrator</div>
+      </div>
+      <a href="/myproject/FirstAPP/logout.php" class="btn-logout-icon" title="Logout">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5-5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg>
+      </a>
+    </div>
+  </div>
+</aside>
+
+<!-- ══════════════════════════════════════════════════════ -->
+<!-- MAIN -->
+<!-- ══════════════════════════════════════════════════════ -->
+<div class="main">
+  <header class="topbar">
+    <div style="display:flex;align-items:center;gap:14px;">
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+      </button>
+      <h1 class="topbar-title" id="pageTitle">Bookings</h1>
+    </div>
+    <div class="topbar-right">
+      <div class="search-wrap">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        <input type="text" class="search-input" id="searchInput" placeholder="Search…">
+      </div>
+    </div>
+  </header>
+
+  <div class="content">
+
+    <!-- ══════════ BOOKINGS PAGE ══════════ -->
+    <div class="page active" id="page-bookings">
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">All Bookings</span>
+          <button class="btn btn-accent">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            New Booking
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table id="bookingsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Guest</th>
+                <th>Cabin</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Status</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>#1001</td><td>James Carter</td><td>Cabin A</td>
+                <td>Oct 28, 2026</td><td>Oct 31, 2026</td>
+                <td><span class="badge badge-green">Confirmed</span></td><td>$540</td>
+              </tr>
+              <tr>
+                <td>#1002</td><td>Amara Osei</td><td>Cabin B</td>
+                <td>Nov 1, 2026</td><td>Nov 5, 2026</td>
+                <td><span class="badge badge-yellow">Pending</span></td><td>$720</td>
+              </tr>
+              <tr>
+                <td>#1003</td><td>Sofia Reyes</td><td>Cabin C</td>
+                <td>Nov 3, 2026</td><td>Nov 10, 2026</td>
+                <td><span class="badge badge-green">Confirmed</span></td><td>$1,260</td>
+              </tr>
+              <tr>
+                <td>#1004</td><td>David Kim</td><td>Cabin A</td>
+                <td>Nov 7, 2026</td><td>Nov 9, 2026</td>
+                <td><span class="badge badge-red">Cancelled</span></td><td>$360</td>
+              </tr>
+              <tr>
+                <td>#1005</td><td>Lena Müller</td><td>Cabin D</td>
+                <td>Nov 12, 2026</td><td>Nov 15, 2026</td>
+                <td><span class="badge badge-purple">Checked-in</span></td><td>$540</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ CABINS PAGE ══════════ -->
+    <div class="page" id="page-cabins">
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">All Cabins</span>
+          <button class="btn btn-accent">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Add Cabin
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table id="cabinsTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Capacity</th>
+                <th>Price / night</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Cabin A</strong></td><td>2 guests</td><td>$180</td>
+                <td><span class="badge badge-green">Available</span></td>
+                <td><button class="btn btn-ghost" style="padding:5px 10px;font-size:0.75rem;">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Cabin B</strong></td><td>4 guests</td><td>$240</td>
+                <td><span class="badge badge-yellow">Booked</span></td>
+                <td><button class="btn btn-ghost" style="padding:5px 10px;font-size:0.75rem;">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Cabin C</strong></td><td>6 guests</td><td>$320</td>
+                <td><span class="badge badge-green">Available</span></td>
+                <td><button class="btn btn-ghost" style="padding:5px 10px;font-size:0.75rem;">Edit</button></td>
+              </tr>
+              <tr>
+                <td><strong>Cabin D</strong></td><td>2 guests</td><td>$160</td>
+                <td><span class="badge badge-purple">Occupied</span></td>
+                <td><button class="btn btn-ghost" style="padding:5px 10px;font-size:0.75rem;">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Add / Edit Cabin form -->
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">Add New Cabin</span>
+        </div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="cabinName">Cabin Name</label>
+            <input type="text" id="cabinName" placeholder="e.g. Cabin E">
+          </div>
+          <div class="field">
+            <label for="cabinCap">Capacity</label>
+            <input type="number" id="cabinCap" placeholder="e.g. 4" min="1">
+          </div>
+          <div class="field">
+            <label for="cabinPrice">Price per Night ($)</label>
+            <input type="number" id="cabinPrice" placeholder="e.g. 200" min="0">
+          </div>
+          <div class="field">
+            <label for="cabinStatus">Status</label>
+            <select id="cabinStatus">
+              <option>Available</option>
+              <option>Booked</option>
+              <option>Maintenance</option>
+            </select>
+          </div>
+          <div class="field field-full">
+            <label for="cabinDesc">Description</label>
+            <textarea id="cabinDesc" placeholder="Brief description of the cabin…"></textarea>
+          </div>
+        </div>
+        <div style="margin-top:18px;display:flex;gap:10px;">
+          <button class="btn btn-accent">Save Cabin</button>
+          <button class="btn btn-ghost">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ USERS PAGE ══════════ -->
+    <div class="page" id="page-users">
+      <div class="panel">
+        <div class="panel-head">
+          <span class="panel-title">All Users</span>
+          <button class="btn btn-accent">
+            <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+            Add User
+          </button>
+        </div>
+        <div class="table-wrap">
+          <table id="usersTable">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Joined</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><div class="user-cell"><span class="tbl-avatar">JC</span>James Carter</div></td>
+                <td>james@example.com</td><td>Guest</td><td>Sep 12, 2026</td>
+                <td><span class="badge badge-green">Active</span></td>
+              </tr>
+              <tr>
+                <td><div class="user-cell"><span class="tbl-avatar">AO</span>Amara Osei</div></td>
+                <td>amara@example.com</td><td>Guest</td><td>Oct 1, 2026</td>
+                <td><span class="badge badge-green">Active</span></td>
+              </tr>
+              <tr>
+                <td><div class="user-cell"><span class="tbl-avatar">SR</span>Sofia Reyes</div></td>
+                <td>sofia@example.com</td><td>Guest</td><td>Oct 5, 2026</td>
+                <td><span class="badge badge-yellow">Pending</span></td>
+              </tr>
+              <tr>
+                <td><div class="user-cell"><span class="tbl-avatar">DK</span>David Kim</div></td>
+                <td>david@example.com</td><td>Admin</td><td>Aug 20, 2026</td>
+                <td><span class="badge badge-green">Active</span></td>
+              </tr>
+              <tr>
+                <td><div class="user-cell"><span class="tbl-avatar">LM</span>Lena Müller</div></td>
+                <td>lena@example.com</td><td>Guest</td><td>Oct 18, 2026</td>
+                <td><span class="badge badge-red">Suspended</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══════════ SETTINGS PAGE ══════════ -->
+    <div class="page" id="page-settings">
+
+      <!-- Account settings -->
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">Account</span></div>
+        <div class="form-grid">
+          <div class="field">
+            <label for="settName">Display Name</label>
+            <input type="text" id="settName" placeholder="Admin">
+          </div>
+          <div class="field">
+            <label for="settEmail">Email Address</label>
+            <input type="email" id="settEmail" placeholder="admin@example.com">
+          </div>
+          <div class="field">
+            <label for="settPwd">New Password</label>
+            <input type="password" id="settPwd" placeholder="Leave blank to keep current">
+          </div>
+          <div class="field">
+            <label for="settPwdC">Confirm Password</label>
+            <input type="password" id="settPwdC" placeholder="Repeat new password">
+          </div>
+        </div>
+        <div style="margin-top:18px;">
+          <button class="btn btn-accent">Save Changes</button>
+        </div>
+      </div>
+
+      <!-- Notifications -->
+      <div class="panel">
+        <div class="panel-head"><span class="panel-title">Notifications</span></div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">New booking alerts</div>
+            <div class="toggle-desc">Get notified when a new booking is created</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="switch-track"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Cancellation alerts</div>
+            <div class="toggle-desc">Get notified when a booking is cancelled</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="switch-track"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">New user sign-ups</div>
+            <div class="toggle-desc">Alert when a new user registers</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox">
+            <span class="switch-track"></span>
+          </label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <div class="toggle-label">Weekly summary email</div>
+            <div class="toggle-desc">Receive a summary report every Monday</div>
+          </div>
+          <label class="switch">
+            <input type="checkbox" checked>
+            <span class="switch-track"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Danger zone -->
+      <div class="panel" style="border-color: var(--error-soft);">
+        <div class="panel-head"><span class="panel-title" style="color:var(--error)">Danger Zone</span></div>
+        <p style="font-size:0.875rem;color:var(--fg-muted);margin-bottom:16px;">These actions are permanent and cannot be undone.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn" style="background:var(--error-soft);color:var(--error);border:1px solid var(--error-soft);">Clear All Bookings</button>
+          <button class="btn" style="background:var(--error-soft);color:var(--error);border:1px solid var(--error-soft);">Delete All Users</button>
+        </div>
+      </div>
+
+    </div><!-- /settings -->
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<script>
+const pages = {
+  bookings: 'Bookings',
+  cabins:   'Cabins',
+  users:    'Users',
+  settings: 'Settings'
+};
+
+function showPage(name) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item[id^="nav-"]').forEach(n => n.classList.remove('active'));
+  // Show selected
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  document.getElementById('pageTitle').textContent = pages[name];
+  document.getElementById('searchInput').value = '';
+}
+
+// Sidebar mobile toggle
+const sidebar = document.getElementById('sidebar');
+document.getElementById('hamburger').addEventListener('click', () => sidebar.classList.toggle('open'));
+document.addEventListener('click', e => {
+  if (sidebar.classList.contains('open') && !sidebar.contains(e.target) && e.target.id !== 'hamburger')
+    sidebar.classList.remove('open');
+});
+
+// Live search — filters visible table rows
+document.getElementById('searchInput').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  const activePage = document.querySelector('.page.active');
+  if (!activePage) return;
+  activePage.querySelectorAll('tbody tr').forEach(row => {
+    row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+  });
+});
+</script>
+
+</body></html>
