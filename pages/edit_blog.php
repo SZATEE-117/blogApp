@@ -13,7 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
           $description = htmlspecialchars(trim($_POST["description"]));
       }
 
-
     $myBlogs = file_get_contents("blog.txt");
     $myBlogArray = json_decode($myBlogs);
     $blogToEdit = $myBlogArray[$index];

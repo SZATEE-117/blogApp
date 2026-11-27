@@ -39,5 +39,4 @@ switch($page){
   default:
     include "dashboard.php";
 }
-
 include "template-footer.php";
